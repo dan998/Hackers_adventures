@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ORIGIN PROTOCOL – INTRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<style>
+body {
+    margin: 0;
+   font-family: 'Orbitron', sans-serif;
+    color: #00ff88;
+    text-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a, #0f1015, #020b16, #00121f);
+    background-size: 300% 300%;
+    animation: softMove 20s ease infinite;
+}
+
+@keyframes softMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#hackerBG {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    opacity: 0;
+    transition: 1s ease;
+    z-index: -1;
+}
+
+.matrixRain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('images/lntro/backgroundintro.jpeg') no-repeat center center;
+    background-size: cover;
+    opacity: 0.3;
+    filter: blur(1px);
+    z-index: -1;
+}
+
+.scanlines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        rgba(0,0,0,0) 0px,
+        rgba(0,255,100,0.04) 2px,
+        rgba(0,0,0,0) 4px
+    );
+    animation: scanMove 3s linear infinite;
+}
+
+@keyframes scanMove {
+    0% { transform: translateY(-10%); }
+    100% { transform: translateY(10%); }
+}
+
+#storyBox {
+    padding: 5vw;
+    font-size: 4vw;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#secretFile {
+    display: none;
+    padding: 5vw;
+    border-left: 3px solid #00ff88;
+    margin-top: 20px;
+    animation: fadeIn 2s forwards;
+    backdrop-filter: blur(4px);
+    background: rgba(0, 20, 10, 0.25);
+}
+
+#topSecretImgs img {
+    max-width: 40vw;
+    height: auto;
+}
+
+#pathChoices {
+    display: none;
+    margin-top: 20px;
+    padding: 5vw;
+}
+
+button.choice {
+    background: transparent;
+    border: 2px solid #00ff88;
+    padding: 3vw;
+    margin: 2vw 0;
+    width: 100%;
+    color: #00ff88;
+    font-size: 4vw;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
+}
+
+button.choice:hover {
+    background: #00ff88;
+    color: black;
+}
+
+.glitch { animation: glitchAnim 0.15s infinite; }
+@keyframes glitchAnim {
+    0% { text-shadow: 2px 0 red, -2px 0 blue; }
+    50% { text-shadow: -3px 0 red, 3px 0 blue; }
+    100% { text-shadow: 2px 0 red, -2px 0 blue; }
+}
+
+.skull {
+    position: absolute;
+    width: 25vw;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    mix-blend-mode: screen;
+    animation: skullFlash 1.5s ease-in-out infinite;
+}
+
+.topSecretImg {    
+    position: absolute;
+    width: 40vw;
+    max-width: 20    0px;
+    top: 65%;
+    left: 10%;
+    opaci1y: 0;
+    animation: secretFlash 5s infinite;
+}
+
+#startScreen {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    background:#020b16; color:#00ff88;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    z-index:10; cursor:pointer;
+}
+
+#startScreen h1 { font-size:8vw; margin:0; text-align:center; }
+#startScreen p { font-size:4vw; margin-top:10px; text-align:center; }
+
+@keyframes fadeIn { from {opacty:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+@keyframes skullFlash { 0%,50%,100% { opacity:0; transform: translateX(-50%) scale(1);} 25%,75% { opacity:0.5; transform: translateX(-50%) scale(1.2);} }
+@keyframes secretFlash { 0%,80%,100% {opacity:0;} 10%,30%,50% {opacity:0.6;} }
+</style>
+</head>
+
+<body>
+
+<div id="startScreen">
+    <h1>CLICK TO BEGIN ORIGIN PROTOCOL</h1>
+    <p>Experience the hacker's journey</p>
+</div>
+
+<div id="hackerBG">
+    <div class="matrixRain"></div>
+    <div class="scanlines"></div>
+</div>
+
+<div id="storyBox"></div>
+
+<div id="secretFile">
+    <h2>[TOP SECRET FILE — ACCESS RESTRICTED]</h2>
+  
+    <p id="fileText"></p>
+
+<div id="topSecretImgs">
+    <img class="skull" src="images/Intro/preview.png">
+
+    <!-- FIXED: missing src + wrong path -->
+    <img class="topSecretImg" src="images/Intro/files.jpg">
+
+    <!-- FIXED: correct class + correct path -->
+    <img class="topSecretImg" src="classified.jpeg" style="left:70%;">
+
+    <!-- FIXED: missing src + wrong path -->
+    <img class="topSecretImg" src="images/Intro/society.jpeg" style="left:70%;">
+</div>
+</div> 
+
+<div id="pathChoices">
+    <h2>SELECT YOUR BEGINNER PATH</h2>
+    <button class="choice" onclick="choosePath('decoder')">🔹 Path 1 — Code Decoder</button>
+    <button class="choice" onclick="choosePath('terminal')">🔹 Path 2 — Terminal Rookie</button>
+    <button class="choice" onclick="choosePath('network')">🔹 Path 3 — Signal Tracker</button>
+</div>
+
+<audio id="glitchSound">
+  <source src="intro-glitch-sound.mp3" type="audio/mpeg">
+</audio>
+
+<script>    
+const storyLines = [
+    "It started like an ordinary day.", "", "He knew nothing about coding.", "No skills. No knowledge. Just a routine life.",
+    "", "Then something strange appeared.", "", "An invite link from a group he never joined.",
+    "", "'JOIN CHANNEL — INVITE CODE: ZX-9183-ALPHA'", "", "He tapped it.", "", "The screen glitched.", 
+    "Something began decrypting...", "", "*** SYSTEM BREACH DETECTED ***"
+];
+
+let index = 0;
+const storyBox = document.getElementById("storyBox");
+let charSpeed = /Android|iPhone|iPad/i.test(navigator.userAgent) ? 65 : 55; // slightly slower on mobile
+let linePause = 450;
+
+let storyVoice = null;
+let hackerVoice = null;
+
+function loadVoices() {
+    const voices = speechSynthesis.getVoices();
+    storyVoice = voices.find(v => v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("english")) || voices[0];
+    hackerVoice = voices.find(v => v.name.toLowerCase().includes("zira") || v.name.toLowerCase().includes("male") || v.name.toLowerCase().includes("robot")) || voices[0];
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+
+function speakStoryLine(text){
+    if(!text.trim()) return;
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.voice = storyVoice; msg.pitch=1.1; msg.rate=0.93; msg.volume=1;
+    speechSynthesis.speak(msg);
+}
+
+function typeLineWithVoice(text, callback){
+    let i=0;
+    if(text.trim().length>0) speakStoryLine(text);
+    function reveal(){
+        if(i<text.length){
+            storyBox.innerHTML += text.charAt(i); i++;
+            setTimeout(reveal,charSpeed);
+        }else{
+            storyBox.innerHTML+="\n";
+            setTimeout(callback,linePause);
+        }
+    }
+    reveal();
+}
+
+function playStory(){
+    if(index<storyLines.length){
+        typeLineWithVoice(storyLines[index],()=>{
+            index++; playStory();
+        });
+    } else { triggerGlitch(); }
+}
+
+function speakHackerVoice(){
+    const msg=new SpeechSynthesisUtterance(
+        "System breach detected. Unauthorized access confirmed. Activating the Origin Protocol. Decrypting classified files. Stand by."
+    );
+    msg.voice=hackerVoice; msg.pitch=0.4; msg.rate=0.65; msg.volume=1;
+    speechSynthesis.speak(msg);
+}
+
+function triggerGlitch(){
+    document.getElementById("glitchSound").play();
+    setTimeout(()=>{speakHackerVoice();},300);
+    storyBox.classList.add("glitch");
+    document.getElementById("hackerBG").style.opacity="1";
+    setTimeout(()=>{
+        storyBox.innerHTML="";
+        storyBox.classList.remove("glitch");
+        revealSecretFile();
+    },2000);
+}
+
+const secretText = `
+FILE ORIGIN: UNKNOWN
+SECURITY LEVEL: █████████ (CLASSIFIED)
+
+Incident Summary:
+• Unauthorized connection detected.
+• Subject scanned: NO EXPERIENCE.
+• Status: BEGINNER — ZERO THREAT.
+
+But after the invite was opened…
+The device unlocked something unexpected.
+
+System Recommendations:
+— Initiate Basic Training Protocol
+— Select Initial Specialization Below
+`;
+
+function revealSecretFile(){
+    document.getElementById("secretFile").style.display="block";
+    const msg=new SpeechSynthesisUtterance(secretText);
+    msg.voice=hackerVoice; msg.pitch=0.35; msg.rate=0.72;
+    speechSynthesis.speak(msg);
+    const fileBox=document.getElementById("fileText");
+    let i=0;
+    function typeFile(){
+        if(i<secretText.length){
+            fileBox.innerHTML+=secretText.charAt(i); i++;
+            setTimeout(typeFile,33);
+        } else {
+            document.querySelectorAll(".skull, .topSecretImg").forEach(img=>img.style.opacity="1");
+            document.getElementById("pathChoices").style.display="block";
+        }
+    }
+    typeFile();
+}
+
+function choosePath(path){ window.location.href="level1_"+path+".html"; }
+
+const startScreen = document.getElementById("startScreen");
+startScreen.addEventListener("click",()=>{ startScreen.style.display="none"; playStory(); });
+startScreen.addEventListener("touchstart",()=>{ startScreen.style.display="none"; playStory(); },{passive:true});
+</script>
+</body>
+</html>
