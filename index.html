@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hacker Story Mode</title>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        color: #0f0;
+        font-family: "Courier New", monospace;
+        overflow: hidden;
+    }
+
+    /* Matrix-like falling text */
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+    }
+
+    .center-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 2;
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 40px;
+        text-shadow: 0 0 10px #0f0;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        opacity: 0.8;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background: transparent;
+        border: 2px solid #0f0;
+        color: #0f0;
+        padding: 12px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #0f0;
+        color: #000;
+        box-shadow: 0 0 20px #0f0;
+    }
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="center-box">
+    <h1>THE AWAKENING</h1>
+    <p>Every legend starts with a spark...  
+    You are about to enter a world hidden from ordinary eyes.</p>
+    <button onclick="startStory()">BEGIN STORY</button>
+</div>
+
+<script>
+// MATRIX EFFECT
+const c = document.getElementById("matrix");
+const ctx = c.getContext("2d");
+
+c.height = window.innerHeight;
+c.width = window.innerWidth;
+
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&*";
+const fontSize = 14;
+const columns = c.width / fontSize;
+
+let drops = [];
+for (let x = 0; x < columns; x++) drops[x] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    ctx.fillStyle = "#0f0";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > c.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 35);
+
+// GO TO NEXT PAGE
+function startStory() {
+    window.location.href = "intro.html";
+}
+</script>
+
+</body>
+</html>
